@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RegisterFormData } from '../../interfaces/register-form-data';
-import { Router } from '@angular/router';
-import { CustomValidators } from '../../helpers/custom-validators';
+import { UserService } from '../../services/user.service';
+import { User } from '../../interfaces/user';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-register',
@@ -11,19 +12,29 @@ import { CustomValidators } from '../../helpers/custom-validators';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  users: User[] = [];
+  newEmail: string ='';
+  newPassword: string='';
+  newConfirmPassword: string='';
+  newLastName: string='';
+  newFirstName: string=''; 
+  isAddingUser = false;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {}
+  constructor(private userService: UserService, private notificationService: NzNotificationService) {}
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, CustomValidators.passwordValidator]],
-      confirmPassword: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
-    }, {
-      validator: this.passwordMatchValidator
+    this.getListOfUsers();
+  }
+
+  getListOfUsers(){
+    this.userService.getListOfUsers().subscribe({
+      next: (res)=>{
+        this.users = res;
+      },
+      error: (err)=>{
+        this.users =[];
+        this.notificationService.error("Error","Something went wrong!");
+      },
     });
   }
 
@@ -38,19 +49,23 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (this.registerForm.invalid) {
-      return;
-    }
-  
-    const formData: RegisterFormData = this.registerForm.value;
-  
-    this.http.post('https://reqres.in/api/register', formData)
-      .subscribe(response => {
-        console.log('Utilizatorul a fost înregistrat cu succes!', response);
-        this.router.navigate(['/login']);
-      }, error => {
-        console.error('A apărut o eroare în timpul înregistrării!', error);
+  addNewUser(){
+    this.isAddingUser = true;
+    this.userService
+      .createNewUser(this.newEmail, this.newPassword, this.newConfirmPassword, this.newLastName, this.newFirstName)
+      .subscribe({
+        next: (res) =>{
+          this.isAddingUser = false;
+          this.notificationService.success('Success', 'Added new user!');
+          this.getListOfUsers();
+        },
+        error: (err)=>{
+          this.isAddingUser = false;
+          this.notificationService.error("Error","Something went wrong!");
+        }
       });
-  }  
+  }
+///-------
+////kkkk
+    
 }
