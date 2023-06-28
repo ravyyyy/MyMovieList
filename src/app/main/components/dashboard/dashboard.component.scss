@@ -6,10 +6,9 @@
   z-index: 1;
   align-items: flex-start;
   top: 0;
-  transform: translate(-50%, 0);
 }
 
-.gradient-button {
+.gradient-button-1 {
   background: linear-gradient(to right, #ff5f6d, #ffc371);
   color: white;
   border: none;
@@ -20,8 +19,23 @@
   transition: background 0.3s ease;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 40%;
+  transform: translate(-50%, 0%);
+}
+
+.gradient-button-2 {
+  background: linear-gradient(to right, #ff5f6d, #ffc371);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, 0%);
 }
 
 .gradient-button:hover {
