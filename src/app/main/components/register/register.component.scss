@@ -23,7 +23,7 @@
     margin-top: 5px;
   }
   
-  button[type="submit"] {
+  button, button[type="submit"] {
     background-color: #ff5f6d;
     color: white;
     border: none;
@@ -34,7 +34,7 @@
     transition: background 0.3s ease;
   }
   
-  button[type="submit"]:hover {
+  button, button[type="submit"]:hover {
     background-color: #ff3d4d;
   }
   

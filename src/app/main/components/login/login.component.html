@@ -4,13 +4,15 @@
       <input type="email" id="email" [(ngModel)]="email" name="email" required>
     </div>
     <div>
-      <label for="password">Password</label>
+      <label for="password">Parolă</label>
       <input type="password" id="password" [(ngModel)]="password" name="password" required>
     </div>
     <div>
-      <label for="rememberMe">Remember me</label>
+      <label for="rememberMe">Ține-mă minte</label>
       <input type="checkbox" id="rememberMe" [(ngModel)]="rememberMe" name="rememberMe">
     </div>
-    <button type="submit">Login</button>
+    <button type="submit">Autentificare</button>
+    <div style="width: 20px; height: 20px;"></div>
+    <button routerLink="/">Înapoi</button>
   </form>
   
