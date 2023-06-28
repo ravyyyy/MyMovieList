@@ -5,18 +5,23 @@ import { MainRoutingModule } from './main-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BackgroundComponent } from './components/background/background.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     BackgroundComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class MainModule { }
