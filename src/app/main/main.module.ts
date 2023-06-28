@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
 @NgModule({
   declarations: [
