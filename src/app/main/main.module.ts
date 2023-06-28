@@ -8,7 +8,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { NzFormModule} from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,10 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
     MainRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NzFormModule,
+    NzInputModule,
+    NzButtonModule
   ]
 })
 export class MainModule { }

@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, UntypedFormGroup, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { RegisterFormData } from '../../interfaces/register-form-data';
-import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-
+import { Validators, UntypedFormGroup, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
+import { CustomValidators } from '../../helpers/custom-validators';
 
 @Component({
   selector: 'app-register',
@@ -17,11 +11,6 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
 export class RegisterComponent implements OnInit {
   validateForm!: UntypedFormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  
-  };
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -62,7 +51,8 @@ export class RegisterComponent implements OnInit {
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
       firstName: [null, [Validators.required]],
-      lastName: [null, Validators.required]
+      lastName: [null, [Validators.required]]
     });
   }
+  
 }
