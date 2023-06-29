@@ -31,6 +31,6 @@ export class BackgroundComponent implements OnInit {
     setInterval(() => {
       const randomIndex = Math.floor(Math.random() * this.backgroundImages.length);
       this.currentBackgroundImage = this.backgroundImages[randomIndex];
-    }, 5000);
+    }, 1500);
   }
 }
