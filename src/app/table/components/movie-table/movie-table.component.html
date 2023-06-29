@@ -25,12 +25,9 @@
     <nz-table #basicTable [nzData]="moviesList" [nzPageSize]="8">
         <thead>
             <tr>
-                <th nzLeft>Title</th>
-                <th>Year</th>
-                <th>Director</th>
-                <th>Genre</th>
-                <th>Review</th>
-                <th></th>
+                <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+                    {{ column.title }}
+                </th>
             </tr>
         </thead>
         <tbody>

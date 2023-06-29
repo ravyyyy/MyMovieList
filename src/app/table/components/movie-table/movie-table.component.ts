@@ -1,20 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Movie } from '../../interfaces/movie.interface';
 import { MoviesService } from '../../services/movies.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzTableComponent } from 'ng-zorro-antd/table';
 @Component({
   selector: 'app-movie-table',
   templateUrl: './movie-table.component.html',
   styleUrls: ['./movie-table.component.scss']
 })
 export class MovieTableComponent implements OnInit{
+  @ViewChild('basicTable', { static: true }) basicTable!: NzTableComponent<Movie>;
   moviesList!: Movie[];
   isModalVisible: boolean = false;
   movieForm!: FormGroup;
   isEditModalVisible: boolean = false;
   editMovieForm!: FormGroup;
   actualTitle!: string;
+
+  listOfColumn = [
+    {
+      title: 'Title',
+      compare: (a: Movie, b: Movie) => a.title.localeCompare(b.title),
+      priority: false
+    },
+    {
+      title: 'Year',
+      compare: (a: Movie, b: Movie) => a.year - b.year,
+      priority: 3
+    },
+    {
+      title: 'Director',
+      compare: (a: Movie, b: Movie) => a.director.localeCompare(b.director),
+      priority: 2
+    },
+    {
+      title: 'Genre',
+      compare: (a: Movie, b: Movie) => a.genre.localeCompare(b.genre),
+      priority: 1
+    },
+    {
+      title: 'Review'
+    }
+  ];
 
   constructor(
     private moviesService: MoviesService,
@@ -154,5 +182,5 @@ export class MovieTableComponent implements OnInit{
     } else {
       this.moviesList = this.moviesService.movies;
     }
-  }  
+  } 
 }
