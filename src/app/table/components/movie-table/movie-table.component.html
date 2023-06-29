@@ -1,6 +1,8 @@
 <nz-page-header class="page-header" nzTitle="Movies">
+    
+  </nz-page-header>  
 
-</nz-page-header>
+ <input type="text" nz-input placeholder="Search by title" #searchInput (input)="searchByTitle(searchInput.value)">
 
 <div class="table-container">
     <div class="table-operations">

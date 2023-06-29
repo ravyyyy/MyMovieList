@@ -146,4 +146,13 @@ export class MovieTableComponent implements OnInit{
   get review(): FormControl {
     return this.movieForm.get('review') as FormControl;
   }
+
+  searchByTitle(title: string): void {
+    if (title) {
+      const lowerCaseTitle = title.toLowerCase();
+      this.moviesList = this.moviesService.movies.filter(movie => movie.title.toLowerCase().includes(lowerCaseTitle));
+    } else {
+      this.moviesList = this.moviesService.movies;
+    }
+  }  
 }
