@@ -16,3 +16,44 @@
 .red-text {
     color: red;
 }
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+  
+  .search-icon {
+    color: #999999;
+    margin-right: 8px;
+  }
+  
+  .search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: #333333;
+  }
+  
+  .search-input::placeholder {
+    color: #999999;
+  }
+  
+  .search-input:focus {
+    box-shadow: 0 0 4px #1890ff;
+  }
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

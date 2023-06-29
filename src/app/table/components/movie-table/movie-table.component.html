@@ -1,9 +1,20 @@
 <nz-page-header class="page-header" nzTitle="Movies">
-    
-  </nz-page-header>  
-
- <input type="text" nz-input placeholder="Search by title" #searchInput (input)="searchByTitle(searchInput.value)">
-
+</nz-page-header>
+<div class="search-container">
+    <nz-input-group nzSearch class="search-bar">
+      <ng-template nzAddOnBefore>
+        <i nz-icon nzType="search" class="search-icon"></i>
+      </ng-template>
+      <input
+        class="search-input"
+        type="text"
+        nz-input
+        placeholder="Search a movie by title"
+        #searchInput
+        (input)="searchByTitle(searchInput.value)"
+      />
+    </nz-input-group>
+  </div>
 <div class="table-container">
     <div class="table-operations">
         <button nz-button (click)="add()">
