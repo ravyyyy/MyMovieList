@@ -24,7 +24,7 @@ export class LoginComponent {
       password: this.password
     };
 
-    this.http.post<LoginResponse>('https://reqres.in/api/login', loginData).subscribe(
+    this.http.post<LoginResponse>('https://reqres.in/api/login', loginData).subscribe( // Use for valid example: eve.holt@reqres.in - cityslicka
       response => {
         console.log(response);
 
