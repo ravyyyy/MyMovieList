@@ -19,13 +19,19 @@ const routes: Routes = [
   },
   {
     path: 'table',
-    loadChildren: () => import('./table/table.module').then((m) => m.TableModule)
+    loadChildren: () => import('./table/table.module').then((m) => m.TableModule),
   },
   {
     path: 'table/movies',
     component: MovieTableComponent
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

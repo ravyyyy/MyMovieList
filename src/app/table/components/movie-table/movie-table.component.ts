@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../interfaces/movie.interface';
 import { MoviesService } from '../../services/movies.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Form, FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-movie-table',
   templateUrl: './movie-table.component.html',
@@ -19,9 +18,7 @@ export class MovieTableComponent implements OnInit{
 
   constructor(
     private moviesService: MoviesService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
+    private route: ActivatedRoute) {
     this.route.queryParams.subscribe((res) => {
       console.log(res);
     });
