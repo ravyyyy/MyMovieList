@@ -1,1 +1,112 @@
-<p>movie-table works!</p>
+<div class="table-container">
+    <div class="table-operations">
+        <button nz-button (click)="add()">
+            Add
+        </button>
+    </div>
+
+    <nz-table #basicTable [nzData]="moviesList" [nzPageSize]="8">
+        <thead>
+            <tr>
+                <th nzLeft>Title</th>
+                <th>Year</th>
+                <th>Director</th>
+                <th>Genre</th>
+                <th>Review</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data">
+                <td nzLeft>{{ data.title}}</td>
+                <td>{{ data.year }}</td>
+                <td>{{ data.director }}</td>
+                <td>{{ data.genre | uppercase}}</td>
+                <td>{{ data.review }}</td>
+                <td>
+                    <span class="delete-button" nz-icon nzType="delete" nzTheme="outline" (click)="delete(data)" title="Delete movie"></span>
+                    <span class="edit-button" nz-icon nzType="edit" nzTheme="outline" (click)="edit(data)" title="Edit movie"></span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+    <nz-modal [(nzVisible)]="isModalVisible" nzTitle="Add new movie" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+        <ng-container *nzModalContent>
+            <form nz-form [formGroup]="movieForm">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please add the title!">
+                        <input type="text" nz-input formControlName="title" id="title" placeholder="Title">
+                        <div class="red-text" *ngIf="title?.errors?.['required']">
+                            Title is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <input type="number" nz-input formControlName="year" id="year" placeholder="Year">
+                        <div class="red-text" *ngIf="year?.errors?.['required']">
+                            Year is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="director" id="director" placeholder="Director">
+                        <div class="red-text" *ngIf="director?.errors?.['required']">
+                            Director is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="genre" id="genre" placeholder="Genre">
+                        <div class="red-text" *ngIf="genre?.errors?.['required']">
+                            Genre is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <input type="text" nz-input formControlName="review" id="review" placeholder="Review">
+                        <div class="red-text" *ngIf="review?.errors?.['required']">
+                            Review is required.
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </ng-container>
+    </nz-modal>
+
+    <nz-modal [(nzVisible)]="isEditModalVisible" nzTitle="Edit movie" (nzOnOk)="handleEditOk()" (nzOnCancel)="handleEditCancel()">
+        <ng-container *nzModalContent>
+          <form nz-form [formGroup]="editMovieForm">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the title!">
+                <input type="text" nz-input formControlName="title" id="title" placeholder="Title">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the year!">
+                <input type="number" nz-input formControlName="year" id="year" placeholder="Year">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the director!">
+                <input type="text" nz-input formControlName="director" id="director" placeholder="Director">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please add the genre!">
+                <input type="text" nz-input formControlName="genre" id="genre" placeholder="Genre">
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Please add the review!">
+                  <input type="text" nz-input formControlName="review" id="review" placeholder="Review">
+                </nz-form-control>
+              </nz-form-item>
+          </form>
+        </ng-container>
+      </nz-modal>
+</div>

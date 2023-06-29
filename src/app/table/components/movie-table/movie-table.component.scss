@@ -1,0 +1,18 @@
+.table-container {
+    padding: 2rem;
+
+    .table-operations {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+}
+
+.delete-button, .edit-button {
+    cursor: pointer;
+}
+
+.red-text {
+    color: red;
+}
