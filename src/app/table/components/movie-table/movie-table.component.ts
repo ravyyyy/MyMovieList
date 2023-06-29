@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Movie } from '../../interfaces/movie.interface';
 import { MoviesService } from '../../services/movies.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +12,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 })
 export class MovieTableComponent implements OnInit{
   @ViewChild('basicTable', { static: true }) basicTable!: NzTableComponent<Movie>;
+  @Output() movieDeleted: EventEmitter<Movie> = new EventEmitter<Movie>();
   moviesList!: Movie[];
   isModalVisible: boolean = false;
   movieForm!: FormGroup;
@@ -96,6 +97,7 @@ export class MovieTableComponent implements OnInit{
     if (index !== -1) {
       this.moviesList.splice(index, 1);
       this.moviesService.moviesListSubject.next(this.moviesList);
+      this.movieDeleted.emit(movie);
     }
   }
 
@@ -189,7 +191,6 @@ export class MovieTableComponent implements OnInit{
   }
 
   openModal(data: any): void {
-    // Deschide modalul și afișează detaliile filmului selectat
     this.modalRef = this.modalService.create({
       nzTitle: 'Movie Details',
       nzContent: `<div><strong>Title:</strong> ${data.title}</div>
@@ -197,7 +198,7 @@ export class MovieTableComponent implements OnInit{
                   <div><strong>Director:</strong> ${data.director}</div>
                   <div><strong>Genre:</strong> ${data.genre}</div>
                   <div><strong>Review:</strong> ${data.review}</div>`,
-      nzFooter: null, // Poți adăuga și un subsol la modal, dacă dorești
+      nzFooter: null,
     });
   }
 }
