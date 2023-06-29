@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface LoginResponse {
   token: string;
@@ -15,7 +16,7 @@ export class LoginComponent {
   password: string;
   rememberMe: boolean;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     const loginData = {
@@ -31,6 +32,8 @@ export class LoginComponent {
           localStorage.setItem('token', response.token);
           // Remember user's token
         }
+
+        this.router.navigate(['/table/movies']);
       },
       error => {
         console.error(error);

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './main/components/register/register.component';
 import { LoginComponent } from './main/components/login/login.component';
+import { MovieTableComponent } from './table/components/movie-table/movie-table.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'table',
+    loadChildren: () => import('./table/table.module').then((m) => m.TableModule)
+  },
+  {
+    path: 'table/movies',
+    component: MovieTableComponent
   }
 ];
 
