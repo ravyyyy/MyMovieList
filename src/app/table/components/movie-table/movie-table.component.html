@@ -24,26 +24,26 @@
 
     <nz-table #basicTable [nzData]="moviesList" [nzPageSize]="8">
         <thead>
-            <tr>
-                <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
-                    {{ column.title }}
-                </th>
-            </tr>
+          <tr>
+            <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+              {{ column.title }}
+            </th>
+          </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of basicTable.data">
-                <td nzLeft>{{ data.title}}</td>
-                <td>{{ data.year }}</td>
-                <td>{{ data.director }}</td>
-                <td>{{ data.genre | uppercase}}</td>
-                <td>{{ data.review }}</td>
-                <td>
-                    <span class="delete-button" nz-icon nzType="delete" nzTheme="outline" (click)="delete(data)" title="Delete movie"></span>
-                    <span class="edit-button" nz-icon nzType="edit" nzTheme="outline" (click)="edit(data)" title="Edit movie"></span>
-                </td>
-            </tr>
+          <tr *ngFor="let data of basicTable.data" (click)="openModal(data)">
+            <td nzLeft>{{ data.title }}</td>
+            <td>{{ data.year }}</td>
+            <td>{{ data.director }}</td>
+            <td>{{ data.genre | uppercase }}</td>
+            <td>{{ data.review }}</td>
+            <td>
+              <span class="delete-button" nz-icon nzType="delete" nzTheme="outline" (click)="delete(data)" title="Delete movie"></span>
+              <span class="edit-button" nz-icon nzType="edit" nzTheme="outline" (click)="edit(data)" title="Edit movie"></span>
+            </td>
+          </tr>
         </tbody>
-    </nz-table>
+      </nz-table>      
 
     <nz-modal [(nzVisible)]="isModalVisible" nzTitle="Add new movie" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
         <ng-container *nzModalContent>

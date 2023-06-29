@@ -4,6 +4,7 @@ import { MoviesService } from '../../services/movies.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzTableComponent } from 'ng-zorro-antd/table';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-movie-table',
   templateUrl: './movie-table.component.html',
@@ -17,6 +18,8 @@ export class MovieTableComponent implements OnInit{
   isEditModalVisible: boolean = false;
   editMovieForm!: FormGroup;
   actualTitle!: string;
+
+  private modalRef: NzModalRef | null = null;
 
   listOfColumn = [
     {
@@ -46,7 +49,8 @@ export class MovieTableComponent implements OnInit{
 
   constructor(
     private moviesService: MoviesService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private modalService: NzModalService) {
     this.route.queryParams.subscribe((res) => {
       console.log(res);
     });
@@ -182,5 +186,18 @@ export class MovieTableComponent implements OnInit{
     } else {
       this.moviesList = this.moviesService.movies;
     }
-  } 
+  }
+
+  openModal(data: any): void {
+    // Deschide modalul și afișează detaliile filmului selectat
+    this.modalRef = this.modalService.create({
+      nzTitle: 'Movie Details',
+      nzContent: `<div><strong>Title:</strong> ${data.title}</div>
+                  <div><strong>Year:</strong> ${data.year}</div>
+                  <div><strong>Director:</strong> ${data.director}</div>
+                  <div><strong>Genre:</strong> ${data.genre}</div>
+                  <div><strong>Review:</strong> ${data.review}</div>`,
+      nzFooter: null, // Poți adăuga și un subsol la modal, dacă dorești
+    });
+  }
 }
